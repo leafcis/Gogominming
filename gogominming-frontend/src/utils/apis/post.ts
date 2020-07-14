@@ -25,6 +25,31 @@ export const uploadPost: thunk = ({jwt, title, content}) =>  async dispatch => {
   }
 }
 
+export const mypageThunk: thunk = ({jwt}) => async dispatch => {
+  try {
+    const {data: {result}} = await axios.get('http://localhost:8000/api/post/mypage', {
+      headers: {
+        Authorization: jwt
+      }
+    });
+
+    dispatch({
+      type: "MYPAGE",
+      post: [...result.post],
+      chat: []
+    })
+  }
+  catch (error) {
+    localStorage.removeItem('jwt')
+
+    dispatch({
+      type: "LOGOUT"
+    })
+    
+    alert(error);
+  }
+}
+
 export const postThunk: thunk = ({jwt}) => async dispatch => {
   try {
     const {data: {result}} = await axios.get('http://localhost:8000/api/post/load', {

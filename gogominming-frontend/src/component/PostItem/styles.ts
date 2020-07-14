@@ -13,9 +13,42 @@ export const PostItemWrapper = styled.div`
 
   & .post {
     padding: 10px 20px;
-    background-color: #fbfbfb;
+    background-color: #f0f0f0;
     font-size: 15px;
     height: 150px;
     box-sizing: border-box;
+  }
+
+  & .comment_wrapper {
+    font-size: 15px;
+    box-sizing: border-box;
+  }
+
+  & .comment {
+    background-color:#ffffff;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+
+    &:nth-child(2n) {
+      background-color:#f0f0f0;
+    }
+
+    & .content {
+      width: 900px;
+    }
+
+    & .vote {
+      display: flex;
+    }
+  }
+
+  & .comment_input {
+    display: flex;
+
+    & input {
+      width: 95%;
+    }
   }
 `

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Modal } from '../../../component';
 import PostModal from './PostModal'
+import CommentModal from './CommentModal'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducer';
 
@@ -12,6 +13,8 @@ const ModalContainer = () => {
     switch (modalType) {
       case "post":
         return <PostModal />;
+      case "comments":
+        return <CommentModal />
       default:
         return null;
     }

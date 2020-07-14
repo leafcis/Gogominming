@@ -18,6 +18,12 @@ export const auth = (state: typeof initialState = initialState, action: any) => 
         mypost: [],
         mychat: []
       }
+    case "MYPAGE":
+      return {
+        ...state,
+        mypost: action.post,
+        mychat: action.chat
+      }
     default:
       return state
   }

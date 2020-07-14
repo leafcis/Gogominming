@@ -15,4 +15,10 @@ export const HeaderWrapper = styled.div`
     height: 100%;
     align-items: center;
   }
+
+  & .header_info {
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
+  }
 `

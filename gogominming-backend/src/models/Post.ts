@@ -4,7 +4,7 @@ const PostSchema = new mongoose.Schema({
   uid: String,
   title: String,
   post: String,
-  comments: []
+  comments: [],
 })
 
 PostSchema.statics.create = function(this: any, uid: string, title: string, post: string) {
@@ -19,7 +19,13 @@ PostSchema.statics.create = function(this: any, uid: string, title: string, post
 }
 
 PostSchema.statics.load = async function(this: any, uid: string) {
-  const postList = await this.find({uid: {$ne : uid}}).select("title _id post comments");
+  const postList = await this.find({uid: {$ne : uid}}).select("title _id post comments").lean();
+
+  return postList;
+}
+
+PostSchema.statics.myload = async function(this: any, uid: string) {
+  const postList = await this.find({uid: uid}).select("title _id post comments").lean();
 
   return postList;
 }

@@ -7,6 +7,7 @@ import Main from './Main/Main';
 import PostItem from './PostItem/PostItem';
 import Modal from './common/Modal/Modal';
 import PostModal from './common/Modal/PostModal/PostModal';
+import CommentModal from './common/Modal/CommentModal/CommentModal';
 
 export {
   Login,
@@ -17,5 +18,6 @@ export {
   Main,
   PostItem,
   Modal,
-  PostModal
+  PostModal,
+  CommentModal
 }
