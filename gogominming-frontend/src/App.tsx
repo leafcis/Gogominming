@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-function App() {
+import Router from './utils/router';
+
+import { G } from './utils/style';
+
+import { postThunk } from './utils/apis';
+import { RootState } from './reducer';
+
+const App = () => {
+  const dispatch = useDispatch();
+  const info = useSelector((state: RootState) => state.auth)
+  const loginInfo = localStorage.getItem('loginInfo') as string;
+  const jwt = localStorage.getItem('jwt');
+  const loginInfoObject = JSON.parse(loginInfo);
+
+  useEffect(() => {
+    if(jwt) {
+      dispatch(postThunk({jwt}));
+
+      dispatch({
+        type: "LOGIN",
+        ...loginInfoObject,
+        post: [],
+        chat: []
+      })
+    }
+  }, [info.nickname]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <G.GlobalStyle />
+      <Router />
     </div>
   );
 }
