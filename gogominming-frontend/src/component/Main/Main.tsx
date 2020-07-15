@@ -13,7 +13,7 @@ type MainProps = {
 const Main: React.FC<MainProps> = ({isLogin, postData}) => {
   const dispatch = useDispatch();
   const postDataList = postData.map((el: any) => 
-    <PostItem {...el}/>
+    <PostItem key={el._id} {...el}/>
   ) || <div>로딩중...</div>;
 
   return (

@@ -48,7 +48,7 @@ export const PostItemWrapper = styled.div`
     display: flex;
 
     & input {
-      width: 95%;
+      flex: 8;
     }
   }
 `

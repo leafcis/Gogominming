@@ -4,7 +4,8 @@ const CommentSchema = new mongoose.Schema({
   uid: String,
   content: String,
   count: Number,
-  vote: []
+  vote: [],
+  chat: String
 })
 
 CommentSchema.statics.create = function(this, uid: string, content: string) {
@@ -12,7 +13,8 @@ CommentSchema.statics.create = function(this, uid: string, content: string) {
     uid,
     content,
     count: 0,
-    vote: []
+    vote: [],
+    chat: ''
   })
 
   return commentData.save();
@@ -24,10 +26,17 @@ CommentSchema.statics.load = async function(this, _id: string) {
   return comment; 
 }
 
-CommentSchema.methods.votes = function(this: any, _id:string, uid: string, agree: boolean) {
-  if(this.vote.include(uid)) {
+CommentSchema.methods.createChat = function(this:any, _id: any) {
+  this.chat = _id;
+  return this.save();
+}
+
+CommentSchema.methods.votes = async function(this: any, uid: string, agree: boolean) {
+  console.log(this.vote)
+  if(!this.vote.includes(uid)) {
     const base = this.count;
     this.count = agree ? base + 1 : base - 1;
+    this.vote = [...this.vote, uid]
 
     this.save();
 

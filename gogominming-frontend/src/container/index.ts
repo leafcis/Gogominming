@@ -1,4 +1,5 @@
 import LoginContainer from './Login/Login';
+import SignupContainer from './Login/Signup';
 import MypageContainer from './Mypage/Mypage';
 import HeaderContainer from './common/Header/Header';
 import ModalContainer from './common/Modal/Modal';
@@ -11,5 +12,6 @@ export {
   HeaderContainer,
   MainContainer,
   ChatContainer,
-  ModalContainer
+  ModalContainer,
+  SignupContainer
 }

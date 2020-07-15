@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import * as S from './styles'
@@ -12,11 +12,12 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ nickname, mypost, mychat }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <S.HeaderWrapper>
       <div className="content">
-        <span>고고밍밍</span>
+        <span>고고민밍</span>
         <div>
           {
             nickname ? 
@@ -28,6 +29,7 @@ const Header: React.FC<HeaderProps> = ({ nickname, mypost, mychat }) => {
                 dispatch({
                   type: "LOGOUT"
                 })
+                history.push('/');
               }}>로그아웃</div>
             </div>
             : 

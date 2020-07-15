@@ -24,3 +24,18 @@ export const loginThunk: thunk = ({uid, password}) => async dispatch => {
     alert(error.response.data);
   }
 }
+
+export const signup = async ({uid, password, nickname}: {
+  uid: string,
+  password: string,
+  nickname: string
+}) => {
+  try {
+    return await axios.post('http://localhost:8000/api/auth/register', {
+      uid, password, nickname
+    })
+  }
+  catch (error) {
+    
+  }
+}

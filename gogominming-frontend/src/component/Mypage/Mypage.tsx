@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import * as S from './styles'
 import { getMyCommentPostThunk } from '../../utils/apis/comment';
@@ -13,6 +14,8 @@ const Mypage: React.FC<MypageProps> = ({info}) => {
   const dispatch = useDispatch();
   const jwt = localStorage.getItem('jwt');
   const post = [...info.mypost]
+  const chat = [...info.mychat]
+  const history = useHistory();
 
   return (
     <S.MypageWrapper>
@@ -23,8 +26,8 @@ const Mypage: React.FC<MypageProps> = ({info}) => {
           <div className="inner">
             {
               post.map((el:any) => 
-                <div className="post_wrapper" onClick={() => [
-                  dispatch(getMyCommentPostThunk({jwt, _id: el._id}))
+                <div key={el._id} className="post_wrapper" onClick={() => [
+                  dispatch(getMyCommentPostThunk({jwt, _id: el._id, title: el.title}))
                 ]}>
                   <div className="post_title">{el.title}</div>
                   <div className="post_content">{el.post.slice(0, 10).concat("...")}</div>
@@ -35,7 +38,19 @@ const Mypage: React.FC<MypageProps> = ({info}) => {
         </div>
         <div className="wrapper">
           <div className="title">내 채팅</div>
-        </div>
+          <div className="inner">
+            {
+              chat.map((el:any) => 
+                <div key={el._id} className="post_wrapper" onClick={() => {
+                  history.push(`/chat/${el._id}`)
+                }}>
+                  <div className="post_title">{el.title}</div>
+                  <div className="post_content">{el.isQuestioner ? '질문자': '상담자'}</div>
+                </div>
+              )
+            }
+          </div>
+          </div>
       </div>
     </S.MypageWrapper>
   );};

@@ -38,9 +38,27 @@ const mypageLoadComment: AuthFunction<any, Response> = async (request, response)
   }
 }
 
+const voteComment: AuthFunction<any, Response> = async (request, response) => {
+  const uid = request.decoded;
+  const { _id, agree } = request.body;
+  try {
+    const commentInfo = await Comment.findOne({ _id })
+    if(await commentInfo.votes(uid, agree)) {
+      response.status(200).json({result: 'success'})
+    }
+    else {
+      response.status(200).json({result: '이미 눌렀음'});
+    }
+  }
+  catch(error) {
+    console.log(error)
+    response.status(400).json(error.message)
+  }
+}
 
 router.use(auth);
 router.post('/create', createComment);
+router.post('/vote', voteComment);
 router.get('/mycomment/:params', mypageLoadComment);
 
 export default router;

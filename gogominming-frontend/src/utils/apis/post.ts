@@ -32,11 +32,12 @@ export const mypageThunk: thunk = ({jwt}) => async dispatch => {
         Authorization: jwt
       }
     });
+    console.log(result)
 
     dispatch({
       type: "MYPAGE",
       post: [...result.post],
-      chat: []
+      chat: [...result.chat]
     })
   }
   catch (error) {

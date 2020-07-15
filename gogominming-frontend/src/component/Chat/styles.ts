@@ -21,18 +21,41 @@ export const ChatWrapper = styled.div`
     height: calc(100% - 90px);
     background-color: #ffffff;
     position: relative;
+    padding: 10px 10px;
+    box-sizing: border-box;
 
-    & input {
-      position: absolute;
+    & .input {
       width: 100%;
-      height: 30px;
-      font-size: 17px;
-      box-sizing: border-box;
+      display: flex;
+      position: absolute;
       bottom: 0;
+      left: 0;
+      justify-content: space-between;
+
+      & input {
+        flex: 8;
+      }
+
+      & button {
+        flex: 1;
+      }
     }
   }
 `
 
 export const ChatLogWrapper = styled.div`
+  & .chat_wrapper {
+    margin-bottom: 10px;
+    background-color: #fbfbfb;
+    padding: 10px 10px;
 
+    &:nth-child(2n) {
+      background-color: #f0f0f0;
+    }
+
+    & .chatter {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+  }
 `

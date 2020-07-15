@@ -36,4 +36,10 @@ UserSchema.methods.createPost = function(this, _id: string) {
   return this.save();
 }
 
+UserSchema.methods.createChat = function(this, _id: string) {
+  this.chat = [...this.chat, _id];
+
+  return this.save();
+}
+
 export default mongoose.model<any, any>('user', UserSchema);

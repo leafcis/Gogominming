@@ -13,7 +13,7 @@ const ModalContainer = () => {
     switch (modalType) {
       case "post":
         return <PostModal />;
-      case "comments":
+      case "comment":
         return <CommentModal />
       default:
         return null;

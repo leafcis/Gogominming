@@ -1,4 +1,5 @@
 import Login from './Login/Login';
+import Signup from './Login/Signup';
 import Header from './common/Header/Header';
 import Mypage from './Mypage/Mypage';
 import Chat from './Chat/Chat';
@@ -11,6 +12,7 @@ import CommentModal from './common/Modal/CommentModal/CommentModal';
 
 export {
   Login,
+  Signup,
   Mypage,
   Header,
   Chat,

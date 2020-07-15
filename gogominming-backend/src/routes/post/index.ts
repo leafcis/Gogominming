@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { Post, User, Comment } from '../../models'
+import { Post, User, Comment, Chat } from '../../models'
 import crypto from 'crypto';
 import auth from '../../middlewares/auth.middle';
 
@@ -50,12 +50,27 @@ const mypageLoadPost: AuthFunction<any, Response> = async (request, response) =>
   const uid = request.decoded;
   try {
     const postList = await Post.myload( uid );
+    const chatList = await User.findOne({uid}).select("chat").lean()
+    const returnChatList = await Promise.all(chatList.chat.map(async (el: any) => {
+      const chatInfo = await Chat.findOne({_id: el});
+      let isQuestioner = false;
+      if(chatInfo.patient[0].uid === uid) isQuestioner = true;
+      console.log(chatInfo)
+      return {
+        _id: chatInfo._id,
+        title: chatInfo.title,
+        isQuestioner
+      }
+    }))
+    console.log(returnChatList)
     response.status(200).json({result: {
-        post: postList
+        post: postList,
+        chat: returnChatList,
       }
     })
   }
   catch (error) {
+    console.log(error)
     response.status(400).json(error.message);
   }
 }

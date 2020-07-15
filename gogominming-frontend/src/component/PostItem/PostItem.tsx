@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import * as S from './styles';
 import { useDispatch } from 'react-redux';
-import { commentPostThunk } from '../../utils/apis'
+import { commentPostThunk, doVoteCommentThunk } from '../../utils/apis'
 
 type PostItemProps = {
   _id: string,
@@ -25,8 +25,12 @@ const PostItem: React.FC<PostItemProps> = ({_id, title, post, comments}) => {
           <div className="comment">
             <div className="content">{el.content}</div>
             <div className="vote">
-              <button>추천</button>
-              <button>비추천</button>
+              <button onClick = {() => {
+                dispatch(doVoteCommentThunk({jwt, _id: el._id, agree:true}))
+              }}>추천</button>
+              <button onClick = {() => {
+                dispatch(doVoteCommentThunk({jwt, _id: el._id, agree:false}))
+              }}>비추천</button>
             </div>
           </div>
         )}
